@@ -1,0 +1,62 @@
+= Yockeries - Yaml + Mocks + Factories(easy way to create them)
+
+Long ago there was an uprising against YAML fixtures in the rails world. Some
+people replaced them with things like FactoryGirl, Machinist, Fabrication, and a
+bunch of others.
+
+However, YAML is still the simpliest thing that works, because it comes with
+Ruby. When you load in a yaml file with YAML.load_file, the yaml data is
+converted into a hash, which again is simple to use and test. You can take
+that hash and create a new object with it: Person.new(yaml_converted_hash),
+you can use it to create a stand-in double/mock:
+OpenStruct.new(yaml_converted_hash).
+
++Yockeries+ is meant to make that a tiny bit simplier with a
+small amount of code.
+
++Yockeries+ gives a convienent yaml loader (smart enough to know if you are
+using rspec, minitest, or testunit) to load an entire fixture file into a hash
+and then use the +get+ method to select which yaml object you want to work
+with.
+
+There is also a method +mock_for+ that will create an +OpenStruct+ object where
+you can create a very simple test +double/mock+.
+
+
+=== YAML File (people.yaml)
+
+  robert:
+   name: Robert Evans
+   email: robert@example.com
+   username: revans
+   password: 123456
+   password_confirmation: 123456
+
+
+
+== Examples:
+
+=== Load a specific User from a YAML File
+
+  fixture(:people).get(:robert) # => {:name=>"Robert Evans", :email=>"robert@example.com", :username=>"revans", :password=>123456, :password_confirmation=>123456}
+
+
+=== Load a mock Object from the YAML file
+
+  fixture(:people).mock_for(:robert) #=> #<OpenStruct name="Robert Evans", email="robert@example.com", username="revans", password=123456, password_confirmation=123456>
+
+=== Real world example with testunit:
+
+  assert_difference "Person.count", 1 do
+   Person.new(
+     fixture(:people).get(:robert)
+   )
+  end
+
+=== Real world example with rspec
+
+  expect {
+   Person.new(
+     fixture(:people).get(:robert)
+   ).save
+  }.to change { Person.count }.by(1)

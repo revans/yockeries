@@ -1,5 +1,5 @@
 require 'minitest/autorun'
-require_relative '../yockeries'
+require_relative '../lib/yockeries'
 
 module Yockeries
   describe YockHash do
