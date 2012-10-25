@@ -30,4 +30,16 @@ module Yockeries
       subject.mock_for('user_1').name.must_equal 'robert'
     end
   end
+
+  describe "Yockeries Loader" do
+    include ::Yockeries::Loader
+
+    it 'will load the file with yaml extension' do
+      fixture(:monkey).mock_for(:albert).bananas.must_equal 10
+    end
+
+    it 'will load the file with a yml extension' do
+      fixture(:cow).mock_for(:betsy).says.must_equal 'moo'
+    end
+  end
 end

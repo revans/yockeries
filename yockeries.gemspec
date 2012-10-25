@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 
 Gem::Specification.new do |gem|
   gem.name          = "yockeries"
-  gem.version       = '0.0.1'
+  gem.version       = '0.0.2'
   gem.authors       = ["Robert Evans"]
   gem.email         = ["robert@codewranglers.org"]
   gem.description   = %q{Use Ruby Fixtures to create mocks or use in place of factories to create objects}
