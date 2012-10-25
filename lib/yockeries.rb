@@ -58,8 +58,7 @@ module Yockeries
 
   module Loader
     def fixture(filename)
-      dir = File.exists?('test') ? 'test' : 'spec'
-      file = Dir.glob("#{dir}/fixtures/#{filename}.{yaml,yml}").first
+      file = Dir.glob("{test,spec}/fixtures/#{filename}.{yaml,yml}").first
       ::Yockeries::YockHash.new(YAML.load_file(file))
     end
   end
