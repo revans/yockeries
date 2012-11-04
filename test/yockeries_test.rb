@@ -22,12 +22,18 @@ module Yockeries
       subject.get('user_2')[:name].must_equal 'tyler'
     end
 
-    it 'will return a mock' do
-      subject.mock_for('user_1').kind_of?(OpenStruct).must_equal true
-    end
+    describe "mocks" do
+      let(:mock) { subject.mock_for('user_1') }
 
-    it 'mocks will imitate an object' do
-      subject.mock_for('user_1').name.must_equal 'robert'
+      it 'will return a mock' do
+        mock.kind_of?(Struct).must_equal true
+      end
+
+      it 'mocks will imitate an object' do
+        mock.name.must_equal  'robert'
+        mock.email.must_equal 'robert@example.com'
+      end
+
     end
   end
 

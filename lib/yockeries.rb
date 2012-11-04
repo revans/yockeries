@@ -1,18 +1,20 @@
 require 'yaml'
-require 'ostruct'
 
 module Yockeries
   class YockHash < Hash
+    attr_reader :hash
+
     def initialize(hash = {})
       @hash = symbolize_keys(hash)
     end
 
     def get(name)
-      @hash[name.to_sym]
+      hash[name.to_sym]
     end
 
     def mock_for(name)
-      OpenStruct.new(get(name))
+      hashed_mock = get(name)
+      ::Struct.new( *(k=hashed_mock.keys)).new( *hashed_mock.values_at(*k) )
     end
 
     private
