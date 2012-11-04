@@ -9,7 +9,7 @@ Ruby. When you load in a yaml file with YAML.load_file, the yaml data is
 converted into a hash, which again is simple to use and test. You can take
 that hash and create a new object with it: Person.new(yaml_converted_hash),
 you can use it to create a stand-in double/mock:
-OpenStruct.new(yaml_converted_hash).
+Struct.new(yaml_converted_hash).
 
 +Yockeries+ is meant to make that a tiny bit simplier with a
 small amount of code.
@@ -19,7 +19,7 @@ using rspec, minitest, or testunit) to load an entire fixture file into a hash
 and then use the +get+ method to select which yaml object you want to work
 with.
 
-There is also a method +mock_for+ that will create an +OpenStruct+ object where
+There is also a method +mock_for+ that will create an +Struct+ object where
 you can create a very simple test +double/mock+.
 
 
@@ -43,7 +43,7 @@ you can create a very simple test +double/mock+.
 
 === Load a mock Object from the YAML file
 
-  fixture(:people).mock_for(:robert) #=> #<OpenStruct name="Robert Evans", email="robert@example.com", username="revans", password=123456, password_confirmation=123456>
+  fixture(:people).mock_for(:robert) #=> #<Struct name="Robert Evans", email="robert@example.com", username="revans", password=123456, password_confirmation=123456>
 
 === Real world example with testunit:
 
