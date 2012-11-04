@@ -19,7 +19,7 @@ using rspec, minitest, or testunit) to load an entire fixture file into a hash
 and then use the +get+ method to select which yaml object you want to work
 with.
 
-There is also a method +mock_for+ that will create an +Struct+ object where
+There is also a method +mock_for+ that will create a +Struct+ object where
 you can create a very simple test +double/mock+.
 
 
